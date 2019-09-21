@@ -1,5 +1,5 @@
 import 'dart:io';
-
+import 'package:path/path.dart' as p;
 import 'package:args/command_runner.dart';
 import 'package:wholesome_cli/commands/generate/subcommands/component.dart';
 import 'package:wholesome_cli/commands/generate/subcommands/guard.dart';
@@ -24,16 +24,16 @@ class Generator extends Command {
   static final Generator instance = Generator._privateConstructor();
 
   @override
-  // TODO: implement description
   String get description => 'Generate a boilerplate code.';
 
   @override
-  // TODO: implement name
   String get name => 'generate';
 
   // [run] may also return a Future.
   void run() {
  
+    
+
     this.runner.runCommand(argResults).catchError((error) {
       if (error is! UsageException) throw error;
       print(error);
