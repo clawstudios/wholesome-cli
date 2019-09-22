@@ -48,7 +48,6 @@ class Creator extends Command {
           this.createCommon();
           this.createComponents();
           this.createGuards();
-          this.createModels();
           this.createPages();
           this.createServices();
           this.rewriteMain();
@@ -111,18 +110,6 @@ class Creator extends Command {
       print('- /lib/guards/ ✔');
 
       // call generate guard with name 'Example Guard';
-
-    });
-  }
-
-  /**
-   * Create Models Folder with the default config files.
-   */
-  void createModels() {
-    Directory(this.basePath + '/lib/models/').create().then((Directory directory) {
-      print('- /lib/models/ ✔');
-
-      // call generate model with name 'Example Model';
 
     });
   }

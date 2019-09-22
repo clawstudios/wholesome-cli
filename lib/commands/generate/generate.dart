@@ -3,7 +3,6 @@ import 'package:path/path.dart' as p;
 import 'package:args/command_runner.dart';
 import 'package:wholesome_cli/commands/generate/subcommands/component.dart';
 import 'package:wholesome_cli/commands/generate/subcommands/guard.dart';
-import 'package:wholesome_cli/commands/generate/subcommands/model.dart';
 import 'package:wholesome_cli/commands/generate/subcommands/page.dart';
 import 'package:wholesome_cli/commands/generate/subcommands/service.dart';
 
@@ -15,7 +14,6 @@ class Generator extends Command {
     addSubcommand(GenerateComponent.instance);
     addSubcommand(GeneratePage.instance);
     addSubcommand(GenerateService.instance);
-    addSubcommand(GenerateModel.instance);
     addSubcommand(GenerateGuard.instance);
 
     // Add parser options or flag here
