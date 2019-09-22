@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'package:path/path.dart' as p;
 import 'package:args/command_runner.dart';
 import 'package:wholesome_cli/commands/generate/subcommands/component.dart';
 import 'package:wholesome_cli/commands/generate/subcommands/guard.dart';

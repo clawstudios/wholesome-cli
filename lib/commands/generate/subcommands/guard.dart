@@ -10,14 +10,12 @@ class GenerateGuard extends Command {
   static final GenerateGuard instance = GenerateGuard._privateConstructor();
 
   @override
-  // TODO: implement description
   String get description => 'Create guard files and boilerplate code.';
 
   @override
-  // TODO: implement name
   String get name => 'guard';
 
-  Future<bool> run() {
+  void run() {
     print('################');
     print('Genereate guard here');
     print('################');

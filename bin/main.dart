@@ -1,6 +1,4 @@
 import 'dart:io';
-import 'dart:convert';
-
 import 'package:args/command_runner.dart';
 import 'package:wholesome_cli/commands/generate/generate.dart';
 import 'package:wholesome_cli/commands/new/new.dart';
