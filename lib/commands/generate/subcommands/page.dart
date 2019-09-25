@@ -18,12 +18,15 @@ class GeneratePage extends Command {
   String DEFAULT_FOLDER = 'pages';
 
   //-- Singleton
-  GeneratePage._privateConstructor() {
+  GeneratePage() {
     // Add parser options or flag here
     argParser.addFlag('stateful', abbr: 's');
   }
 
-  static final GeneratePage instance = GeneratePage._privateConstructor();
+  set setfileName (String _name) {
+    this.fileName = ReCase(_name).paramCase;
+    this.baseName = ReCase(_name).pascalCase;
+  }
 
   @override
   String get description => 'Create page files and boilerplate code.';
@@ -85,7 +88,7 @@ class GeneratePage extends Command {
       } else if (e == 'no-flutter') {
         print('ERROR: This is not a Flutter project, please create a new one with \'wsm new\'.');
       } else {
-        print('ERROR: No pubspec.yaml file found.' + e);
+        print('ERROR: No pubspec.yaml file found.' + e.toString());
       }
       print('NOTICE: To run this command you need to on the root directory of a Flutter project.');
       return false;
@@ -175,7 +178,7 @@ class GeneratePage extends Command {
    */
   void createView() {
     File(p.join(this.filesPath, this.fileName +'.view.dart')).create(recursive: true).then((File file) {
-      file.writeAsString(VIEW_FILE.content(this.baseName, this.SUFIX, this.isStatefuleWidget)).then((file) {
+      file.writeAsString(VIEW_FILE.content(this.baseName, this.SUFIX, this.projectName, false, this.fileName)).then((file) {
         print('- View created successfuly ✔');
       });
     });

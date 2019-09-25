@@ -1,5 +1,11 @@
 import 'dart:io';
+import 'package:path/path.dart' as p;
 import 'package:args/command_runner.dart';
+import 'package:wholesome_cli/commands/generate/subcommands/component.dart';
+import 'package:wholesome_cli/commands/generate/subcommands/guard.dart';
+import 'package:wholesome_cli/commands/generate/subcommands/model.dart';
+import 'package:wholesome_cli/commands/generate/subcommands/page.dart';
+import 'package:wholesome_cli/commands/generate/subcommands/service.dart';
 import 'package:wholesome_cli/commands/new/files/assets.dart' as ASSETS_FILE;
 import 'package:wholesome_cli/commands/new/files/routes.dart' as ROUTES_FILE;
 import 'package:wholesome_cli/commands/new/files/helpers.dart' as HELPERS_FILE;
@@ -8,11 +14,11 @@ import 'package:wholesome_cli/commands/new/files/main.dart' as MAIN_FILE;
 
 class Creator extends Command {
 
+  String projectName;
   String basePath;
 
   //-- Singleton
   Creator._privateConstructor() {
-    // Add parser options or flag here
   }
 
   static final Creator instance = Creator._privateConstructor();
@@ -42,7 +48,8 @@ class Creator extends Command {
         if (result.stdout != null) {
           stdout.write(result.stdout);
 
-          this.basePath = argResults.rest[0];
+          this.projectName = argResults.rest[0];
+          this.basePath = p.join(p.current, argResults.rest[0]);
           print('\n');
           print('# Creating Architecture');
           this.createCommon();
@@ -65,41 +72,42 @@ class Creator extends Command {
    * Create Common Folder with the default config files.
    */
   void createCommon() {
-    Directory(this.basePath + '/lib/common/').create().then((Directory directory) {
-      print('- /lib/common/ ✔');
 
-      // Assets
-      File('./' + directory.path + 'assets.dart').writeAsString(ASSETS_FILE.content).then((File file) {
-        print('-- /lib/common/assets.dart ✔');
-      });
+    String directory = p.join(this.basePath, 'lib', 'common');
 
-      // Colors
-      File('./' + directory.path + 'colors.dart').writeAsString(COLORS_FILE.content).then((File file) {
-        print('-- /lib/common/colors.dart ✔');
-      });
+    Directory(directory).createSync();
+    print('- /lib/common/ ✔');
 
-      // Helpers
-      File('./' + directory.path + 'helpers.dart').writeAsString(HELPERS_FILE.content).then((File file) {
-        print('-- /lib/common/helpers.dart ✔');
-      });
+    // Assets
+    File(p.join(directory, 'assets.dart')).writeAsStringSync(ASSETS_FILE.content);
+    print('-- /lib/common/assets.dart ✔');
 
-      // Routes
-      File('./' + directory.path + 'routes.dart').writeAsString(ROUTES_FILE.content(this.basePath)).then((File file) {
-        print('-- /lib/common/routes.dart ✔');
-      });
-
-    });
+    // Colors
+    File(p.join(directory, 'colors.dart')).writeAsStringSync(COLORS_FILE.content);
+    print('-- /lib/common/colors.dart ✔');
+    
+    // Helpers
+    File(p.join(directory, 'helpers.dart')).writeAsStringSync(HELPERS_FILE.content);
+    print('-- /lib/common/helpers.dart ✔');
+    
+    // Routes
+    File(p.join(directory, 'routes.dart')).writeAsStringSync(ROUTES_FILE.content(this.projectName));
+    print('-- /lib/common/routes.dart ✔');
+      
   }
 
   /**
    * Create Components Folder with the default config files.
    */
   void createComponents() {
-    Directory(this.basePath + '/lib/components/').create().then((Directory directory) {
+    String path = p.join(this.basePath, 'lib', 'components');
+    Directory(path).create().then((Directory directoy) {
+      GenerateComponent componentGen = GenerateComponent();
+      componentGen.filesPath = p.join(path, 'example');
+      componentGen.setfileName = 'example';
+      componentGen.projectName = this.projectName;
+      componentGen.createCode();
       print('- /lib/components/ ✔');
-      
-      // call generate component with name 'Example Component';
-
     });
   }
 
@@ -107,11 +115,13 @@ class Creator extends Command {
    * Create Guards Folder with the default config files.
    */
   void createGuards() {
-    Directory(this.basePath + '/lib/guards/').create().then((Directory directory) {
+    String path = p.join(this.basePath, 'lib', 'guards');
+    Directory(path).create().then((Directory directory) {
+      GenerateGuard guardGen = GenerateGuard();
+      guardGen.filesPath = path;
+      guardGen.setfileName = 'example';
+      guardGen.createCode();
       print('- /lib/guards/ ✔');
-
-      // call generate guard with name 'Example Guard';
-
     });
   }
 
@@ -119,23 +129,30 @@ class Creator extends Command {
    * Create Models Folder with the default config files.
    */
   void createModels() {
-    Directory(this.basePath + '/lib/models/').create().then((Directory directory) {
+
+    String path = p.join(this.basePath, 'lib', 'models');
+    Directory(path).create().then((Directory directory) {
+      GenerateModel modelGen = GenerateModel();
+      modelGen.filesPath = path;
+      modelGen.setfileName = 'example';
+      modelGen.createCode();
       print('- /lib/models/ ✔');
-
-      // call generate model with name 'Example Model';
-
     });
+    
   }
 
   /**
    * Create Pages Folder with the default config files.
    */
   void createPages() {
-    Directory(this.basePath + '/lib/pages/').create().then((Directory directory) {
+    String path = p.join(this.basePath, 'lib', 'pages');
+    Directory(path).create().then((Directory directory) {
+      GeneratePage pageGen = GeneratePage();
+      pageGen.filesPath = p.join(path, 'home');
+      pageGen.setfileName = 'home';
+      pageGen.projectName = this.projectName;
+      pageGen.createCode();
       print('- /lib/pages/ ✔');
-
-      // call generate page with name 'Example Page';
-
     });
   }
 
@@ -143,11 +160,13 @@ class Creator extends Command {
    * Create Services Folder with the default config files.
    */
   void createServices() {
-    Directory(this.basePath + '/lib/services/').create().then((Directory directory) {
+    String path = p.join(this.basePath, 'lib', 'services');
+    Directory(path).create().then((Directory directory) {
+      GenerateService modelGen = GenerateService();
+      modelGen.filesPath = path;
+      modelGen.setfileName = 'example';
+      modelGen.createCode();
       print('- /lib/services/ ✔');
-
-      // call generate service with name 'Example Service'
-
     });
   }
 
@@ -155,10 +174,10 @@ class Creator extends Command {
    * Create Assets Folder with the default config files.
    */
   void createAssets() {
-    Directory(this.basePath + '/assets/').create().then((Directory directory) {
+    Directory(p.join(this.basePath, 'assets')).create().then((Directory directory) {
       print('- /assets/ ✔');
 
-      // call generate default assets
+      // Donwload svg logo from somewhere (s3 ??)
 
     });
   }
@@ -168,7 +187,7 @@ class Creator extends Command {
    */
   void rewriteMain() {
     
-    File('./' + this.basePath + '/lib/main.dart').writeAsString(MAIN_FILE.content(this.basePath)).then((File file) {
+    File(p.join(this.basePath, 'lib','main.dart')).writeAsString(MAIN_FILE.content(this.projectName)).then((File file) {
       print('-- /lib/main.dart ✔');
     });
 

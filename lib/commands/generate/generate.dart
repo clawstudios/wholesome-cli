@@ -11,11 +11,11 @@ class Generator extends Command {
   Generator._privateConstructor() {
     
     // Add Sub Commands
-    addSubcommand(GenerateComponent.instance);
-    addSubcommand(GeneratePage.instance);
-    addSubcommand(GenerateService.instance);
-    addSubcommand(GenerateModel.instance);
-    addSubcommand(GenerateGuard.instance);
+    addSubcommand(GenerateComponent());
+    addSubcommand(GeneratePage());
+    addSubcommand(GenerateService());
+    addSubcommand(GenerateModel());
+    addSubcommand(GenerateGuard());
 
     // Add parser options or flag here
   }

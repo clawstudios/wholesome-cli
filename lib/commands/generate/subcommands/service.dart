@@ -13,11 +13,14 @@ class GenerateService extends Command {
   String DEFAULT_FOLDER = 'services';
 
   //-- Singleton
-  GenerateService._privateConstructor() {
+  GenerateService() {
     // Add parser options or flag here
   }
 
-  static final GenerateService instance = GenerateService._privateConstructor();
+  set setfileName (String _name) {
+    this.fileName = ReCase(_name).paramCase;
+    this.baseName = ReCase(_name).pascalCase;
+  }
 
   @override
   String get description => 'Create service files and boilerplate code.';
@@ -74,7 +77,7 @@ class GenerateService extends Command {
       } else if (e == 'no-flutter') {
         print('ERROR: This is not a Flutter project, please create a new one with \'wsm new\'.');
       } else {
-        print('ERROR: No pubspec.yaml file found.' + e);
+        print('ERROR: No pubspec.yaml file found.' + e.toString());
       }
       print('NOTICE: To run this command you need to on the root directory of a Flutter project.');
       return false;
@@ -108,7 +111,7 @@ class GenerateService extends Command {
     } else {
       this.fileName = ReCase(splitArgument[splitArgument.length - 1]).paramCase;
       this.baseName = ReCase(splitArgument[splitArgument.length - 1]).pascalCase;
-      this.filesPath = p.join(p.current, 'lib', this.DEFAULT_FOLDER, this.fileName);
+      this.filesPath = p.join(p.current, 'lib', this.DEFAULT_FOLDER);
     }
 
   }
@@ -122,10 +125,10 @@ class GenerateService extends Command {
   }
 
   /**
-   * Create View File
+   * Create Service File
    */
   void createService() {
-    File(p.join(this.filesPath, this.fileName +'.view.dart')).create(recursive: true).then((File file) {
+    File(p.join(this.filesPath, this.fileName +'.dart')).create(recursive: true).then((File file) {
       file.writeAsString(SERVICE_FILE.content(this.baseName, this.SUFIX)).then((file) {
         print('- Service created successfuly ✔');
       });
