@@ -1,3 +1,5 @@
+![A Command Line Tool that facilitates code generation for Flutter projects.](https://www.clawstudios.com/assets/wholesome/icon.png)
+
 # Wholesome CLI
 
 Wholesome is a Command Line Tool that aims to facilitate code generation for [Flutter](https://flutter.dev/) projects, proposing a default architecture similar to an MVC architecture but using BLoC pattern.
