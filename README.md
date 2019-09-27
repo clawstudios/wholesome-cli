@@ -181,7 +181,7 @@ Services are singletons that exposes methods to interact with the external resou
 This tool is a development in progress by [Claw Studios](https://www.clawstudios.com/) and is under BSD License. 
 
 If you want to help, contribute or report a bug please use the following channels
-[Slack](https://join.slack.com/t/clawstudios/shared_invite/enQtNzYyNTY2NzI1ODEwLWM1MzEzODc2ZDYxNDY5MmY4NWRkNWRhMzM4MTliM2I3NjM5MjIzM2Q5Y2U0ZTYwZmRkNjc0N2Q3NjRlYTA0MmI)
-[Discord](https://discord.gg/zyghfFq)
-info@clawstudios.com
+- [Slack](https://join.slack.com/t/clawstudios/shared_invite/enQtNzYyNTY2NzI1ODEwLWM1MzEzODc2ZDYxNDY5MmY4NWRkNWRhMzM4MTliM2I3NjM5MjIzM2Q5Y2U0ZTYwZmRkNjc0N2Q3NjRlYTA0MmI)
+- [Discord](https://discord.gg/zyghfFq)
+- info@clawstudios.com
 
