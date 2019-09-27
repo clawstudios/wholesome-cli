@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 import 'package:path/path.dart' as p;
 import 'package:args/command_runner.dart';
@@ -58,6 +59,8 @@ class Creator extends Command {
           this.createModels();
           this.createPages();
           this.createServices();
+          this.createAssets();
+          this.addAssetsToPubspec();
           this.rewriteMain();
         }
 
@@ -152,6 +155,13 @@ class Creator extends Command {
       pageGen.setfileName = 'home';
       pageGen.projectName = this.projectName;
       pageGen.createCode();
+
+      GeneratePage splashGen = GeneratePage();
+      splashGen.filesPath = p.join(path, 'splash');
+      splashGen.setfileName = 'splash';
+      splashGen.projectName = this.projectName;
+      splashGen.createCode(isSplash: true);
+
       print('- /lib/pages/ ✔');
     });
   }
@@ -174,12 +184,44 @@ class Creator extends Command {
    * Create Assets Folder with the default config files.
    */
   void createAssets() {
-    Directory(p.join(this.basePath, 'assets')).create().then((Directory directory) {
+    String assetPath = p.join(this.basePath, 'assets');
+    Directory(assetPath).create().then((Directory directory) {
       print('- /assets/ ✔');
 
-      // Donwload svg logo from somewhere (s3 ??)
+      String body = ASSETS_FILE.logoPng; 
+      String prefix = 'data:image/png;base64,';
+      String bStr = body.substring(prefix.length);
+      
+      File(p.join(assetPath, 'logo.png')).writeAsBytesSync(base64.decode(bStr));
 
     });
+  }
+
+  /**
+   * Add assets folder to pubspec.yaml
+   */
+  void addAssetsToPubspec() {
+    String pubPath = p.join(this.basePath,'pubspec.yaml');
+    File(pubPath).readAsLines().then((List<String> lines) {
+
+      String pubspec = '';
+
+      for (String line in lines) {
+        pubspec += line + '\n';
+
+        if (line.contains('flutter:') && pubspec.contains('dev_dependencies:\n')) {
+          pubspec += '  assets:\n';
+          pubspec += '    - assets/\n';
+          pubspec += '\n';
+        }
+      }
+
+      File(pubPath).writeAsString(pubspec).then((file) {
+        print('- Assets added to pubspec.yaml ✔');
+      });
+      
+    });
+
   }
 
   /**

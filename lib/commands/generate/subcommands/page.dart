@@ -164,12 +164,19 @@ class GeneratePage extends Command {
    * Create each file with boilerplate code
    * | page.view.dart | page.events.dart | page.state.dart | page.bloc.dart |
    */
-  void createCode() {
+  void createCode({ bool isSplash = false }) {
 
-    this.createView();
-    this.createEvents();
+    if (isSplash) {
+      this.createSplashView();
+      this.createSplashEvents();
+      this.createSplashBloc();
+    } else {
+      this.createView();
+      this.createEvents();
+      this.createBloc();
+    }
+    
     this.createState();
-    this.createBloc();
 
   }
 
@@ -185,12 +192,34 @@ class GeneratePage extends Command {
   }
 
   /**
+   * Create Splash View File
+   */
+  void createSplashView() {
+    File(p.join(this.filesPath, this.fileName +'.view.dart')).create(recursive: true).then((File file) {
+      file.writeAsString(VIEW_FILE.splashContent(this.baseName, this.SUFIX, this.projectName, this.fileName)).then((file) {
+        print('- Splash View created successfuly ✔');
+      });
+    });
+  }
+
+  /**
    * Create Events File
    */
   void createEvents() {
     File(p.join(this.filesPath, this.fileName +'.events.dart')).create(recursive: true).then((File file) {
       file.writeAsString(EVENTS_FILE.content(this.baseName, this.SUFIX)).then((file) {
         print('- Events created successfuly ✔');
+      });
+    });
+  }
+
+  /**
+   * Create Splash Events File
+   */
+  void createSplashEvents() {
+    File(p.join(this.filesPath, this.fileName +'.events.dart')).create(recursive: true).then((File file) {
+      file.writeAsString(EVENTS_FILE.splashContent(this.baseName, this.SUFIX)).then((file) {
+        print('- Splash Events created successfuly ✔');
       });
     });
   }
@@ -215,6 +244,19 @@ class GeneratePage extends Command {
     File(p.join(this.filesPath, this.fileName +'.bloc.dart')).create(recursive: true).then((File file) {
       file.writeAsString(BLOC_FILE.content(this.baseName, this.SUFIX, this.fileName, this.projectName, this.DEFAULT_FOLDER, fileFolder: folderFile)).then((file) {
         print('- BLoC created successfuly ✔');
+      });
+    });
+  }
+
+  /**
+   * Create Splash Bloc File
+   */
+  void createSplashBloc() {
+    String folderFile = this.getFolderLevels();
+
+    File(p.join(this.filesPath, this.fileName +'.bloc.dart')).create(recursive: true).then((File file) {
+      file.writeAsString(BLOC_FILE.splashContent(this.baseName, this.SUFIX, this.fileName, this.projectName, this.DEFAULT_FOLDER, fileFolder: folderFile)).then((file) {
+        print('- BLoC Splash created successfuly ✔');
       });
     });
   }
