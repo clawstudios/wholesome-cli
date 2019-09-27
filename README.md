@@ -57,13 +57,13 @@ The whole tool is based on the following folder structure.
 
 ## Commands
 Every Wholesome command needs to be executed by the **wsm** binary. At the moment, you will be able to run the following commands and subcommands:
- - new
- - generate
-	 - component
-	 - guard
-	 - model
-	 - page
-	 - service
+ - [new](https://github.com/clawstudios/wholesome-cli#new)
+ - [generate](https://github.com/clawstudios/wholesome-cli#generate)
+	 - [component](https://github.com/clawstudios/wholesome-cli#component)
+	 - [guard](https://github.com/clawstudios/wholesome-cli#guard)
+	 - [model](https://github.com/clawstudios/wholesome-cli#model)
+	 - [page](https://github.com/clawstudios/wholesome-cli#page)
+	 - [service](https://github.com/clawstudios/wholesome-cli#service)
 
 ## New
 
