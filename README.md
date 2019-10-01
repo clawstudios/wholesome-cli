@@ -8,25 +8,25 @@ This tool is executed using [pub](https://pub.dev/) and generate code for [Flutt
  - [Flutter](https://flutter.dev/docs/get-started/install)
 
 ## Installation
-Since the tool is still on development and it is on an early version for testing, you must install it from the git repository using local source or online source.
+Since the tool is still in development and it is in an early version for testing, you must install it from the git repository either locally or online.
 
 ### Online
-You can install the tool with this repo link running the following line:
+You can install the tool from this repo link by running the following line:
 
     pub global activate --source git https://github.com/clawstudios/wholesome-cli.git
 
 ### Local
-If you clonned the reopository, you can install the tool with the following line repalcing 'path' with the path where is located the repo on your computer
+If you cloned the repository, you can install the tool with the following line replacing '<path>' with the path where the repo is located on your computer.
 
     pub global activate --source path <path>
 
-### Add executable folder to $PATH
+### Add the executable folder to $PATH
 To execute Wholesome from your command line, you need to add the [pub](https://pub.dev/) cache folder to the PATH.
-Check out the [Running Script](https://dart.dev/tools/pub/cmd/pub-global#running-a-script) section in the [pub-global](https://dart.dev/tools/pub/cmd/pub-global) dart documentation to add the path correctly to you Operating System.
+Check out the [Running Script](https://dart.dev/tools/pub/cmd/pub-global#running-a-script) section in the [pub-global](https://dart.dev/tools/pub/cmd/pub-global) Dart documentation to add the path correctly for your system.
 
 ## Before Starting
 
-The whole tool is based on the following folder structure.
+This tool is based on the following folder structure.
 *You can read more about each folder in the section of each subcommand of the generator.*
 
     / myproject
@@ -56,18 +56,18 @@ The whole tool is based on the following folder structure.
 
 
 ## Commands
-Every Wholesome command needs to be executed by the **wsm** binary. At the moment, you will be able to run the following commands and subcommands:
+Every Wholesome command needs to be executed by the **wsm** binary. At the moment, it supports the following commands and subcommands:
  - [new](https://github.com/clawstudios/wholesome-cli#new)
  - [generate](https://github.com/clawstudios/wholesome-cli#generate)
-	 - [component](https://github.com/clawstudios/wholesome-cli#component)
-	 - [guard](https://github.com/clawstudios/wholesome-cli#guard)
-	 - [model](https://github.com/clawstudios/wholesome-cli#model)
-	 - [page](https://github.com/clawstudios/wholesome-cli#page)
-	 - [service](https://github.com/clawstudios/wholesome-cli#service)
+     - [component](https://github.com/clawstudios/wholesome-cli#component)
+     - [guard](https://github.com/clawstudios/wholesome-cli#guard)
+     - [model](https://github.com/clawstudios/wholesome-cli#model)
+     - [page](https://github.com/clawstudios/wholesome-cli#page)
+     - [service](https://github.com/clawstudios/wholesome-cli#service)
 
 ## New
 
-The **new** command generates a new Flutter project with the provided name, the [previously detailed folder](https://discord.gg/zyghfFq) folder structure and some boilerplate code.
+The **new** command generates a new Flutter project with the provided name, the [previously detailed folder](https://discord.gg/zyghfFq) folder structure, and some boilerplate code.
 
     wsm new myproject
     
@@ -102,9 +102,9 @@ And you will find two methods for printing to console.
     HELPERS.printWarn('This is a warning message.');
 
 ### Routes
-In this file you will find a ROUTES Map in where you can add routes and associate them with the generated Page constructor.
+In this file, you will find a ROUTES Map in where you can add routes and associate them with the generated Page constructor.
 
-For more information about routing, please check [Flutter Routing Docs](https://flutter.dev/docs/development/ui/navigation) .
+For more information about routing, please check [Flutter Routing Docs](https://flutter.dev/docs/development/ui/navigation).
 
 ## Generate
 
@@ -114,7 +114,7 @@ This command generates boilerplate code, it receives **one subcommand as a param
 
 ### Component
 
-A component is a reutilizable implementation of code that could have one or more files.
+A component is a reusable implementation of code that could have one or more files.
 
 #### Stateful Component
 For components that need state management, Wholesome generates a set of files inside a folder named the same as the component (as you can see in the [Before Starting](https://discord.gg/zyghfFq) section, inside the 'components' folder)
@@ -146,14 +146,14 @@ For components without state management, Wholesome will generate only a Stateles
 
 Guard classes have methods to manage the access to one or more views, we think that a singleton with a  **canActivate** method that returns a boolean is a start, and can be extended as needed.
 *We know we need to implement a proper way to handle a view lifecycle *
-*These files are created under 'guards' folder as shown in the [Before Starting](https://discord.gg/zyghfFq) section.*
+*These files are created under the 'guards' folder as shown in the [Before Starting](https://discord.gg/zyghfFq) section.*
 
     wsm generate guard <name>
 
 ### Model
 
-Models are classes that represents different data models handled inside an app such as user data to show in a profile view.
-*Models are located inside 'models' folder. (check the [previously detailed folder](https://discord.gg/zyghfFq) structure).*
+Models are classes that represent different data models handled inside an app such as user data to show in a profile view.
+*Models are located inside the 'models' folder. (check the [previously detailed folder](https://discord.gg/zyghfFq) structure).*
 
     wsm generate model <name>
 
@@ -167,13 +167,13 @@ In pages is where you will instantiate components and trigger events to the BLoC
 
     wsm generate page <name>
 
-See Routes Section to know how to add a route to your page.
+See the Routes section to know how to add a route to your page.
 
 ### Service
 
-Services are singletons that exposes methods to interact with the external resources such as APIs or Databases.
+Services are singletons that expose methods to interact with external resources such as APIs or databases.
 
-*Services are located inside 'services' folder. (check the [previously detailed folder](https://discord.gg/zyghfFq) folder structure).*
+*Services are located inside the 'services' folder. (check the [previously detailed folder](https://discord.gg/zyghfFq) folder structure).*
 
     wsm generate service <name>
 
