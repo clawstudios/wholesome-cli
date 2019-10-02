@@ -25,7 +25,7 @@ class Creator extends Command {
   static final Creator instance = Creator._privateConstructor();
 
   @override
-  String get description => 'Creates a new Flutter Project with a preconfigured folder structure and and MVC Architecture.';
+  String get description => 'Creates a new Flutter Project with a preconfigured folder structure and MVC Architecture.';
 
   @override
   String get name => 'new';
