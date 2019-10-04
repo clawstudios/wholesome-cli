@@ -67,7 +67,7 @@ Every Wholesome command needs to be executed by the **wsm** binary. At the momen
 
 ## New
 
-The **new** command generates a new Flutter project with the provided name, the [previously detailed folder](https://discord.gg/zyghfFq) folder structure, and some boilerplate code.
+The **new** command generates a new Flutter project with the provided name, the [previously detailed folder](https://github.com/clawstudios/wholesome-cli/blob/master/README.md#before-starting) folder structure, and some boilerplate code.
 
     wsm new myproject
     
@@ -117,7 +117,7 @@ This command generates boilerplate code, it receives **one subcommand as a param
 A component is a reusable implementation of code that could have one or more files.
 
 #### Stateful Component
-For components that need state management, Wholesome generates a set of files inside a folder named the same as the component (as you can see in the [Before Starting](https://discord.gg/zyghfFq) section, inside the 'components' folder)
+For components that need state management, Wholesome generates a set of files inside a folder named the same as the component (as you can see in the [Before Starting](https://github.com/clawstudios/wholesome-cli/blob/master/README.md#before-starting) section, inside the 'components' folder)
 
     wsm generate component <name>
 
@@ -144,16 +144,33 @@ For components without state management, Wholesome will generate only a Stateles
 
 ### Guard
 
-Guard classes have methods to manage the access to one or more views, we think that a singleton with a  **canActivate** method that returns a boolean is a start, and can be extended as needed.
-*We know we need to implement a proper way to handle a view lifecycle *
-*These files are created under the 'guards' folder as shown in the [Before Starting](https://discord.gg/zyghfFq) section.*
+Guard functionality is to manage the access to one or more views, that's why you will find a default **canActivate** method that returns a boolean ready to be used from a Page. Guards can be extended as needed.
+*These files are created under the 'guards' folder as shown in the [Before Starting](https://github.com/clawstudios/wholesome-cli/blob/master/README.md#before-starting) section.*
 
     wsm generate guard <name>
+
+#### Usage
+
+Guards are implemented as mixins, you can use it on a generated page adding the 'with' keyword to the state class. 
+*[More info about mixins here](https://github.com/dart-lang/language/blob/master/accepted/2.1/super-mixins/feature-specification.md#dart-2-mixin-declarations)*
+
+    ...
+    class _HomePageState extends State<HomePage> with ExampleGuard {
+
+      HomePageBloc _bloc = HomePageBloc();
+
+      @override
+      void initState() {
+          if (!this.canActivate(context)) {
+              // Get out of here
+          }
+      }
+    ...
 
 ### Model
 
 Models are classes that represent different data models handled inside an app such as user data to show in a profile view.
-*Models are located inside the 'models' folder. (check the [previously detailed folder](https://discord.gg/zyghfFq) structure).*
+*Models are located inside the 'models' folder. (check the [previously detailed folder](https://github.com/clawstudios/wholesome-cli/blob/master/README.md#before-starting) structure).*
 
     wsm generate model <name>
 
@@ -163,7 +180,7 @@ Pages are StatefulWidgets with the same structure as components, but they can be
 
 In pages is where you will instantiate components and trigger events to the BLoC for handling state and model mutations.
 
-*Pages are located inside 'pages' folder. (check the [previously detailed folder](https://discord.gg/zyghfFq) folder structure).*
+*Pages are located inside 'pages' folder. (check the [previously detailed folder](https://github.com/clawstudios/wholesome-cli/blob/master/README.md#before-starting) folder structure).*
 
     wsm generate page <name>
 
@@ -173,7 +190,7 @@ See the Routes section to know how to add a route to your page.
 
 Services are singletons that expose methods to interact with external resources such as APIs or databases.
 
-*Services are located inside the 'services' folder. (check the [previously detailed folder](https://discord.gg/zyghfFq) folder structure).*
+*Services are located inside the 'services' folder. (check the [previously detailed folder](https://github.com/clawstudios/wholesome-cli/blob/master/README.md#before-starting) folder structure).*
 
     wsm generate service <name>
 
