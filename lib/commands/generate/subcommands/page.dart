@@ -174,6 +174,7 @@ class GeneratePage extends Command {
       this.createView();
       this.createEvents();
       this.createBloc();
+      this.createRoute();
     }
     
     this.createState();
@@ -258,6 +259,79 @@ class GeneratePage extends Command {
       file.writeAsString(BLOC_FILE.splashContent(this.baseName, this.SUFIX, this.fileName, this.projectName, this.DEFAULT_FOLDER, fileFolder: folderFile)).then((file) {
         print('- BLoC Splash created successfuly ✔');
       });
+    });
+  }
+
+  
+  /**
+   * Create Default Route
+   */
+  void createRoute() {
+    String routesPath = p.join(p.current, 'lib', 'common', 'routes.dart');
+    
+
+
+    File(routesPath).readAsLines().then((List<String> lines) {
+      
+      bool isInsideImports = false;
+      bool isInsideRoutes = false;
+      String newRoutesFile = '';
+      List<String> imports = [];
+      List<String> routes = [];
+      String tail = '';
+      
+      // Read routes file
+      for (String line in lines) {
+
+        if (line.contains('import')) {
+          isInsideImports = true;
+          imports.add(lines.indexOf(line) == 0 ? line : '\n' + line);
+        }
+
+        if (line.contains('ROUTES')) {
+          isInsideRoutes = true;
+        }
+
+        // Separate routes
+        if (isInsideRoutes && !line.contains('}')) {
+          routes.add(line + '\n');
+        } else {
+
+          if (routes.isNotEmpty) {
+            tail += line + '\n';
+          } else if (!isInsideImports && line.isNotEmpty) {
+            newRoutesFile += line + '\n';
+          }
+
+          isInsideRoutes = false;
+          isInsideImports = false;
+        }
+
+      }
+
+      // Add new import
+      imports.add('\nimport \'package:' + this.projectName + '/pages/' + fileName + '/' + fileName + '.view.dart\';\n\n');
+
+      // Add new route
+      routes.add('  \'/' + this.fileName + '\': (context) => '+ this.baseName + this.SUFIX +'(), \n');
+
+      // Asseble imports
+      for (String import in imports) {
+        newRoutesFile += import;
+      }
+
+      // Asseble routes
+      for (String route in routes) {
+        newRoutesFile += route;
+      }
+      
+      // Asseble tail
+      newRoutesFile += tail;
+
+      // Write file
+      File(routesPath).writeAsStringSync(newRoutesFile);
+
+      print('- Route created successfuly ✔');
     });
   }
 
