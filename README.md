@@ -16,7 +16,7 @@ You can install the tool from this repo link by running the following line:
     pub global activate --source git https://github.com/clawstudios/wholesome-cli.git
 
 ### Local
-If you cloned the repository, you can install the tool with the following line replacing '<path>' with the path where the repo is located on your computer.
+If you cloned the repository, you can install the tool with the following line replacing `<path>` with the path where the repo is located on your computer.
 
     pub global activate --source path <path>
 
