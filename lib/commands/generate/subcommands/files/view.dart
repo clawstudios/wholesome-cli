@@ -1,4 +1,4 @@
-String content(String className, String sufix, String projectName, bool isComponent, String fileName, {bool isStateful = true}) {
+String content(String className, String sufix, String projectName, bool isComponent, String fileName, bool isStateles) {
   
   String _stateful = 
   'import \'package:flutter/material.dart\';\n' +
@@ -35,8 +35,8 @@ String content(String className, String sufix, String projectName, bool isCompon
   '}';
 
 
-
   String _stateless = 
+  'import \'package:flutter/material.dart\';\n' +
   'import \'package:flutter/widgets.dart\';\n' +
   '\n' +
   '\n' +
@@ -57,7 +57,7 @@ String content(String className, String sufix, String projectName, bool isCompon
   '}';
 
 
-  return isStateful ? _stateful : _stateless;
+  return isStateles ? _stateless : _stateful;
 }
 
 String splashContent(String className, String sufix, String projectName, String fileName,) {

@@ -185,7 +185,7 @@ class GeneratePage extends Command {
    */
   void createView() {
     File(p.join(this.filesPath, this.fileName +'.view.dart')).create(recursive: true).then((File file) {
-      file.writeAsString(VIEW_FILE.content(this.baseName, this.SUFIX, this.projectName, false, this.fileName)).then((file) {
+      file.writeAsString(VIEW_FILE.content(this.baseName, this.SUFIX, this.projectName, false, this.fileName, false)).then((file) {
         print('- View created successfuly ✔');
       });
     });

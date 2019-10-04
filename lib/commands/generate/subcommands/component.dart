@@ -15,9 +15,13 @@ class GenerateComponent extends Command {
   String baseName;
   String SUFIX = 'Component';
   String DEFAULT_FOLDER = 'components';
+  bool isStateles = false;
 
   //-- Singleton
   GenerateComponent() {
+    argParser.addFlag('stateless', abbr: 's', defaultsTo: false, negatable: false, callback: (value) {
+      this.isStateles = value;
+    });
   }
 
   set setfileName (String _name) {
@@ -160,9 +164,11 @@ class GenerateComponent extends Command {
   void createCode() {
 
     this.createView();
-    this.createEvents();
-    this.createState();
-    this.createBloc();
+    if (!this.isStateles) {
+      this.createEvents();
+      this.createState();
+      this.createBloc();
+    }
 
   }
 
@@ -171,7 +177,7 @@ class GenerateComponent extends Command {
    */
   void createView() {
     File(p.join(this.filesPath, this.fileName +'.view.dart')).create(recursive: true).then((File file) {
-      file.writeAsString(VIEW_FILE.content(this.baseName, this.SUFIX, this.projectName, true, this.fileName)).then((file) {
+      file.writeAsString(VIEW_FILE.content(this.baseName, this.SUFIX, this.projectName, true, this.fileName, this.isStateles)).then((file) {
         print('- View created successfuly ✔');
       });
     });
