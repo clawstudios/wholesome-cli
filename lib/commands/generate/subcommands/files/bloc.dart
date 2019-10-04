@@ -30,12 +30,10 @@ String content(String className, String sufix, String fileName, String projectNa
   '  Sink<'+ className + sufix +'Event> get eventSink => _eventController.sink;\n' +
   '\n' +
   '  //-- Singleton\n' +
-  '  '+ className + sufix +'Bloc._privateConstructor() {\n' +
+  '  '+ className + sufix +'Bloc() {\n' +
   '    this._eventController.stream.listen(processEvent);\n' +
   '  }\n' +
-  '\n' +
-  '  static final '+ className + sufix +'Bloc instance = '+ className + sufix +'Bloc._privateConstructor();\n' +
-  '\n' +
+    '\n' +
   '  //-- Methods\n' +
   '  // Process Event\n' +
   '  void processEvent('+ className + sufix +'Event event) {\n' +
@@ -93,11 +91,11 @@ String splashContent(String className, String sufix, String fileName, String pro
   '  Sink<'+ className + sufix +'Event> get eventSink => _eventController.sink;\n' +
   '\n' +
   '  //-- Singleton\n' +
-  '  '+ className + sufix +'Bloc._privateConstructor() {\n' +
+  '  '+ className + sufix +'Bloc() {\n' +
   '    this._eventController.stream.listen(processEvent);\n' +
   '  }\n' +
   '\n' +
-  '  static final '+ className + sufix +'Bloc instance = '+ className + sufix +'Bloc._privateConstructor();\n' +
+
   '\n' +
   '  //-- Methods\n' +
   '  // Process Event\n' +

@@ -9,11 +9,11 @@ String content(String className, String sufix, String projectName, bool isCompon
   '  '+ className + sufix + '({Key key}) : super(key: key);\n' +
   '\n' +
   '  _'+ className + sufix +'State createState() => _'+ className + sufix +'State();\n' +
-  '}'+
+  '}\n'+
   '\n' +
   'class _'+ className + sufix +'State extends State<'+ className + sufix +'> {\n' +
   '\n' +
-  '  '+ className + sufix + 'Bloc _bloc = '+ className + sufix + 'Bloc.instance;\n' +
+  '  '+ className + sufix + 'Bloc _bloc = '+ className + sufix + 'Bloc();\n' +
   '\n' +
   '  @override\n' +
   '  void dispose() { \n' +
@@ -76,7 +76,7 @@ String splashContent(String className, String sufix, String projectName, String 
   '\n' +
   'class _'+ className + sufix +'State extends State<'+ className + sufix +'> {\n' +
   '\n' +
-  '  '+ className + sufix + 'Bloc _bloc = '+ className + sufix + 'Bloc.instance;\n' +
+  '  '+ className + sufix + 'Bloc _bloc = '+ className + sufix + 'Bloc();\n' +
   '\n' +
   '  @override\n' +
   '  void initState() {\n' +
