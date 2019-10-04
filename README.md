@@ -135,7 +135,7 @@ Contains a class with the State data of the component and only can be modified b
 **name.view.dart:**
 Is a StatefulWidget with a BLoC instance in it and a dispose implementation that includes the _bloc.dispose() call that is needed to shutdown the BLoC controllers when disposing the view.
 
-#### Stateless Component (NOT IMPLEMENTED YET)
+#### Stateless Component
 For components without state management, Wholesome will generate only a StatelessWidget that will be used as a view.
 
     wsm generate component <name> -s
