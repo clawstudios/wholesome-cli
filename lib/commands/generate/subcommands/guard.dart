@@ -128,7 +128,7 @@ class GenerateGuard extends Command {
    * Create Guard File
    */
   void createGuard() {
-    File(p.join(this.filesPath, this.fileName +'.dart')).create(recursive: true).then((File file) {
+    File(p.join(this.filesPath, this.fileName + '.guard.dart')).create(recursive: true).then((File file) {
       file.writeAsString(GUARD_FILE.content(this.baseName, this.SUFIX)).then((file) {
         print('- Guard created successfuly ✔');
       });
