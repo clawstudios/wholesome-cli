@@ -8,14 +8,17 @@ This tool is executed using [pub](https://pub.dev/) and generate code for [Flutt
  - [Flutter](https://flutter.dev/docs/get-started/install)
 
 ## Installation
-Since the tool is still in development and it is in an early version for testing, you must install it from the git repository either locally or online.
+Wholesome-cli now is a (pub.dev package)[https://pub.dev/packages/wholesome_cli/versions/1.0.0] and you can install the stable version from pub, or installit from this repo if you want the latest dev version.
 
-### Online
+### Pub
+    pub global activate wholesome_cli
+
+### Git Online
 You can install the tool from this repo link by running the following line:
 
     pub global activate --source git https://github.com/clawstudios/wholesome-cli.git
 
-### Local
+### Git Local
 If you cloned the repository, you can install the tool with the following line replacing `<path>` with the path where the repo is located on your computer.
 
     pub global activate --source path <path>
