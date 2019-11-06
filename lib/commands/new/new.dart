@@ -154,7 +154,7 @@ class Creator extends Command {
       pageGen.filesPath = p.join(path, 'home');
       pageGen.setfileName = 'home';
       pageGen.projectName = this.projectName;
-      pageGen.createCode();
+      pageGen.createCode(includeProjectName: true);
 
       GeneratePage splashGen = GeneratePage();
       splashGen.filesPath = p.join(path, 'splash');

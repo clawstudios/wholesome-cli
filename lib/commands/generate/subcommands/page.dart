@@ -164,7 +164,7 @@ class GeneratePage extends Command {
    * Create each file with boilerplate code
    * | page.view.dart | page.events.dart | page.state.dart | page.bloc.dart |
    */
-  void createCode({ bool isSplash = false }) {
+  void createCode({ bool isSplash = false , bool includeProjectName = false }) {
 
     if (isSplash) {
       this.createSplashView();
@@ -174,7 +174,7 @@ class GeneratePage extends Command {
       this.createView();
       this.createEvents();
       this.createBloc();
-      this.createRoute();
+      this.createRoute(includeProjectName);
     }
     
     this.createState();
@@ -266,9 +266,16 @@ class GeneratePage extends Command {
   /**
    * Create Default Route
    */
-  void createRoute() {
+  void createRoute(bool includeProjectName) {
+    String basePath;
 
-    String routesPath = p.join(p.current, this.projectName, 'lib', 'common', 'routes.dart');
+    if (includeProjectName) {
+      basePath = p.join(p.current, this.projectName);
+    } else {
+      basePath = p.join(p.current);
+    }
+
+    String routesPath = p.join(basePath, 'lib', 'common', 'routes.dart');
 
     File(routesPath).readAsLines().then((List<String> lines) {
       
