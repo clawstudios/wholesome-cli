@@ -267,9 +267,8 @@ class GeneratePage extends Command {
    * Create Default Route
    */
   void createRoute() {
-    String routesPath = p.join(p.current, 'lib', 'common', 'routes.dart');
-    
 
+    String routesPath = p.join(p.current, this.projectName, 'lib', 'common', 'routes.dart');
 
     File(routesPath).readAsLines().then((List<String> lines) {
       

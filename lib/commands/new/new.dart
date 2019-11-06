@@ -193,7 +193,6 @@ class Creator extends Command {
       String bStr = body.substring(prefix.length);
       
       File(p.join(assetPath, 'logo.png')).writeAsBytesSync(base64.decode(bStr));
-
     });
   }
 
@@ -219,6 +218,9 @@ class Creator extends Command {
       File(pubPath).writeAsString(pubspec).then((file) {
         print('- Assets added to pubspec.yaml ✔');
       });
+
+      
+          print('# add assets to pubspec CREATED');
       
     });
 
@@ -231,6 +233,8 @@ class Creator extends Command {
     
     File(p.join(this.basePath, 'lib','main.dart')).writeAsString(MAIN_FILE.content(this.projectName)).then((File file) {
       print('-- /lib/main.dart ✔');
+      
+          print('# rewrite Main CREATED');
     });
 
   }
