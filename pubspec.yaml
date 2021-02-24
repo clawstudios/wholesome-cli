@@ -1,5 +1,5 @@
 name: wholesome_cli
-description: A Command Line Tool for Flutter Projects. 
+description: A Dart package that implements a Command Line Tool for Flutter Projects. 
 version: 1.0.1
 homepage: https://github.com/clawstudios/wholesome-cli/
 author: Maximiliano Malvido - Claw Studios <info@clawstudios.com>
