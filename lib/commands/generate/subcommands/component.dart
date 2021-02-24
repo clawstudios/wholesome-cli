@@ -2,10 +2,10 @@ import 'dart:io';
 import 'package:path/path.dart' as p;
 import 'package:args/command_runner.dart';
 import 'package:recase/recase.dart';
-import 'package:wholesome_cli/commands/generate/subcommands/files/view.dart' as VIEW_FILE;
-import 'package:wholesome_cli/commands/generate/subcommands/files/events.dart' as EVENTS_FILE;
-import 'package:wholesome_cli/commands/generate/subcommands/files/state.dart' as STATE_FILE;
-import 'package:wholesome_cli/commands/generate/subcommands/files/bloc.dart' as BLOC_FILE;
+import 'package:wholesome_cli/commands/generate/subcommands/files/view.dart' as view_file;
+import 'package:wholesome_cli/commands/generate/subcommands/files/events.dart' as events_file;
+import 'package:wholesome_cli/commands/generate/subcommands/files/state.dart' as state_file;
+import 'package:wholesome_cli/commands/generate/subcommands/files/bloc.dart' as bloc_file;
 
 class GenerateComponent extends Command {
 
@@ -13,7 +13,7 @@ class GenerateComponent extends Command {
   String fileName;
   String filesPath;
   String baseName;
-  String SUFIX = 'Component';
+  String SUFFIX = 'Component';
   String DEFAULT_FOLDER = 'components';
   bool isStateles = false;
 
@@ -41,7 +41,7 @@ class GenerateComponent extends Command {
     this.getProjectName().then((success) {
       if (success) {
         this.getPathsAndNames();
-        print('Generating '+ this.baseName + this.SUFIX);
+        print('Generating '+ this.baseName + this.SUFFIX);
         this.createCode();
 
       }
@@ -177,7 +177,7 @@ class GenerateComponent extends Command {
    */
   void createView() {
     File(p.join(this.filesPath, this.fileName +'.view.dart')).create(recursive: true).then((File file) {
-      file.writeAsString(VIEW_FILE.content(this.baseName, this.SUFIX, this.projectName, true, this.fileName, this.isStateles)).then((file) {
+      file.writeAsString(view_file.content(this.baseName, this.SUFFIX, this.projectName, true, this.fileName, this.isStateles)).then((file) {
         print('- View created successfuly ✔');
       });
     });
@@ -188,7 +188,7 @@ class GenerateComponent extends Command {
    */
   void createEvents() {
     File(p.join(this.filesPath, this.fileName +'.events.dart')).create(recursive: true).then((File file) {
-      file.writeAsString(EVENTS_FILE.content(this.baseName, this.SUFIX)).then((file) {
+      file.writeAsString(events_file.content(this.baseName, this.SUFFIX)).then((file) {
         print('- Events created successfuly ✔');
       });
     });
@@ -199,7 +199,7 @@ class GenerateComponent extends Command {
    */
   void createState() {
     File(p.join(this.filesPath, this.fileName +'.state.dart')).create(recursive: true).then((File file) {
-      file.writeAsString(STATE_FILE.content(this.baseName, this.SUFIX)).then((file) {
+      file.writeAsString(state_file.content(this.baseName, this.SUFFIX)).then((file) {
         print('- State created successfuly ✔');
       });
     });
@@ -212,7 +212,7 @@ class GenerateComponent extends Command {
     String folderFile = this.getFolderLevels();
 
     File(p.join(this.filesPath, this.fileName +'.bloc.dart')).create(recursive: true).then((File file) {
-      file.writeAsString(BLOC_FILE.content(this.baseName, this.SUFIX, this.fileName, this.projectName, this.DEFAULT_FOLDER, fileFolder: folderFile)).then((file) {
+      file.writeAsString(bloc_file.content(this.baseName, this.SUFFIX, this.fileName, this.projectName, this.DEFAULT_FOLDER, fileFolder: folderFile)).then((file) {
         print('- BLoC created successfuly ✔');
       });
     });
